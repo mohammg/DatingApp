@@ -1,0 +1,15 @@
+C#
+C# Extensions
+Nuget Package Manager
+Angular v6 Snippets
+Angular Files
+Angular Language Service
+Angular2-switcher
+Auto Rename Tage
+Braket Pair Colorizer
+Debugger for Chrome
+Material Icon Theme
+Path Intellisense
+Prettier -Code formatter
+TsLint
+
