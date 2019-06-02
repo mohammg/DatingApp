@@ -12,11 +12,11 @@
         <a class="nav-link " href="#">Messages</a>
       </li>
       <li>
-        <a class="dropdown-item" (click)="authservice.logout()"><i class="fa fa-sign-out"></i>Log out</a>
+        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Log out</a>
       </li>
      
     </ul>
-    <div *ngIf="authservice.loggedIn()" class="dropdown">
+    <div *ngIf="loggedIn()" class="dropdown">
       <a class="dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Welcome User
       </a>

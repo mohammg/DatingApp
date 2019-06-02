@@ -1,0 +1,5 @@
+npm install -g @angular/cli@6.2.1
+dotnet new webapi -o DatingApp.API -n DatingApp.API
+npm new DatingApp-SPA
+npm i bootstrap font-awesome
+npm install alertifyjs --save

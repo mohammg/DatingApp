@@ -9,6 +9,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_service/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { AllertifyserviceService } from './_service/allertifyservice.service';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RegisterComponent } from './register/register.component';
       FormsModule
    ],
    providers: [
-      AuthService
+      AuthService,
+      AllertifyserviceService
    ],
    bootstrap: [
       AppComponent
