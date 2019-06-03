@@ -15,6 +15,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using DatingApp.API.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace DatingApp.API
 {
@@ -31,9 +36,14 @@ namespace DatingApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataDbContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefualtConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(option=>{
+                option.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();
+            services.AddAutoMapper();
+            services.AddTransient<SeedDb>();
             services.AddScoped<IAuthReposatry,AuthReposatry>();
+            services.AddScoped<IDatingReposatry,DatingReposatry>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
             {
 options.TokenValidationParameters= new TokenValidationParameters{
@@ -46,7 +56,7 @@ IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedDb seed)
         {
             if (env.IsDevelopment())
             {
@@ -54,8 +64,21 @@ IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.
             }
             else
             {
+                app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null) 
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
              //   app.UseHsts();
             }
+            seed.SeedUsers();
             app.UseAuthentication();
    app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());          //  app.UseHttpsRedirection();
             app.UseMvc();
