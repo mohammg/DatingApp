@@ -18,7 +18,7 @@
     </ul>
     <div *ngIf="loggedIn()" class="dropdown">
       <a class="dropdown-toggle text-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Welcome User
+        Welcome {{ authservice.decodeToken?.unique_name | titlecase }}
       </a>
     
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
