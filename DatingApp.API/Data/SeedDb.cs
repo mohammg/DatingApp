@@ -23,6 +23,7 @@ foreach (var user in users)
 {
    byte[] passwordHash,passwordSalt;
            CreatePasswordHash("password",out passwordHash,out passwordSalt);
+           
            user.Username=user.Username.ToLower();
            user.PasswordHash=passwordHash;
            user.PasswordSalt=passwordSalt;
