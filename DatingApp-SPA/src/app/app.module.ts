@@ -23,6 +23,10 @@ import { MemberCardComponent } from './member/member-card/member-card.component'
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './member/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolver/member-details.resolver';
+import { MemberEditeComponent } from './member/member-edite/member-edite.component';
+import { MemberListResolver } from './_resolver/member-list.resolver';
+import { MemberEditeResolver } from './_resolver/member-edite.resolver';
+import { PereventUnsaveChanges } from './_gurdes/prevent-unsave-changes.guard';
 export function tokenGetter() {
    return localStorage.getItem('token');
  }
@@ -37,7 +41,8 @@ export function tokenGetter() {
       MemberListComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      MemberEditeComponent
    ],
    imports: [
       BrowserModule,
@@ -59,7 +64,10 @@ export function tokenGetter() {
       AuthService,
       AllertifyserviceService,
       UserService,
-      MemberDetailResolver
+      MemberDetailResolver,
+      MemberListResolver,
+      MemberEditeResolver,
+      PereventUnsaveChanges
    ],
    bootstrap: [
       AppComponent
