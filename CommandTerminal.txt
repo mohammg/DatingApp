@@ -7,4 +7,8 @@ npm install @auth0/angular-jwt
 npm install ngx-bootstrap --save or ng add ngx-bootstrap 
 npm i bootswatch@4.1.1
 ng g guard auth --spec=false
+<<<<<<< HEAD
 npm install ngx-gallery --save
+=======
+npm install ngx-gallery --save
+>>>>>>> 07e86b618afeb42e14b5d44deb421215dea18881
