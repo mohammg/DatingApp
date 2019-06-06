@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/_service/auth.service';
 })
 export class MemberEditeComponent implements OnInit {
 user: User;
+photoUrl: string;
 @ViewChild('editeForm') editeForm: NgForm;
 @HostListener('window:beforeunload', ['$event'])
 unloadNotification($event: any) {
@@ -29,6 +30,11 @@ constructor( private route: ActivatedRoute
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.auth.CurrentPhotoUrl.subscribe(photo => this.photoUrl = photo);
+  }
+  changMainPhoto(url: string) {
+    this.user.photoUrl = url;
+    // this.auth.ChangPhoto(url);
   }
   updateUser() {
    this.userservice.updateUser(this.auth.decodeToken.nameid, this.user).subscribe(() => {

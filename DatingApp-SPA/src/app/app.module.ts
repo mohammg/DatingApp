@@ -6,6 +6,9 @@ import { FormsModule} from '@angular/forms';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
+
+
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -27,6 +30,7 @@ import { MemberEditeComponent } from './member/member-edite/member-edite.compone
 import { MemberListResolver } from './_resolver/member-list.resolver';
 import { MemberEditeResolver } from './_resolver/member-edite.resolver';
 import { PereventUnsaveChanges } from './_gurdes/prevent-unsave-changes.guard';
+import { PhotoEditeComponent } from './member/photo-edite/photo-edite.component';
 export function tokenGetter() {
    return localStorage.getItem('token');
  }
@@ -42,7 +46,8 @@ export function tokenGetter() {
       MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      MemberEditeComponent
+      MemberEditeComponent,
+      PhotoEditeComponent
    ],
    imports: [
       BrowserModule,
@@ -51,6 +56,7 @@ export function tokenGetter() {
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
       NgxGalleryModule,
+      FileUploadModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

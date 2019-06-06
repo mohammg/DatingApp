@@ -20,6 +20,9 @@
      
     </ul>
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <span>
+        <img src="{{photpUrl}}">
+      </span>
       <a href id="basic-link" dropdownToggle (click)="false"
       aria-controls="basic-link-dropdown" class="dropdown-toggle text-light" >
         Welcome {{ authservice.decodeToken?.unique_name | titlecase }} <span class="caret"></span>
